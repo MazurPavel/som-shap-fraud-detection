@@ -1,9 +1,9 @@
 # SOM + SHAP Fraud Detection  
-## Explainable Unsupervised Fraud Detection Framework
+### Explainable Unsupervised Fraud Detection Framework
 
-This repository contains a fully working, explainable, **unsupervised fraud detection** framework developed as part of a Master’s thesis project.
+This repository contains a fully working, explainable, unsupervised fraud detection framework developed as a **portfolio-grade research & engineering project**.
 
-The system combines **Self-Organizing Maps (SOM)** for behavioral clustering with **SHAP** for transparent, feature-level explanations, and includes an interactive **Streamlit demo** for exploration and visualization.
+The system combines **Self-Organizing Maps (SOM)** for behavioral clustering with **SHAP** for transparent, feature-level explanations, and includes an **interactive Streamlit demo** for exploration and visualization.
 
 ---
 
@@ -16,7 +16,7 @@ Fraud detection in real financial systems faces several key challenges:
 - Evolving fraud patterns (concept drift)
 - Regulatory requirements for transparency and auditability
 
-Most existing approaches focus either on accuracy or interpretability, but rarely on both — especially in unsupervised settings.
+Most existing approaches focus either on **accuracy** or **interpretability**, but rarely on both — especially in **unsupervised settings**.
 
 This project aims to bridge that gap.
 
@@ -46,7 +46,7 @@ High-level pipeline:
 7. SHAP explanations applied on the surrogate model  
 8. Evaluation & visualization via Streamlit  
 
-This design enables explainability without supervision.
+This design enables **explainability without supervision**.
 
 ---
 
@@ -54,11 +54,11 @@ This design enables explainability without supervision.
 
 The framework was evaluated across three complementary datasets:
 
-| Dataset     | Domain         | Purpose                           |
-|------------|----------------|-----------------------------------|
-| CreditCard | Card payments  | Clean baseline, PCA features      |
-| PaySim     | Mobile money   | Domain shift & behavioral flows   |
-| Vesta      | E-commerce     | High-dimensional, real-world complexity |
+| Dataset     | Domain         | Purpose                                  |
+|------------|----------------|------------------------------------------|
+| CreditCard | Card payments  | Clean baseline, PCA features              |
+| PaySim     | Mobile money   | Domain shift & behavioral flows           |
+| Vesta      | E-commerce     | High-dimensional, real-world complexity  |
 
 This repository includes a **demo version of the Vesta dataset** for reproducibility.
 
@@ -66,14 +66,28 @@ This repository includes a **demo version of the Vesta dataset** for reproducibi
 
 ## 🖥️ Interactive Streamlit Demo
 
-The project includes a Streamlit dashboard that allows users to:
+Below are examples from the interactive Streamlit dashboard showing  
+both **normal** and **high-risk** transactions with SHAP-based explanations.
 
-- Explore SOM-based behavioral clusters
-- Select individual transactions
-- Inspect SHAP explanations (bar chart + table)
-- Understand why a transaction was flagged as risky
+### ✅ Normal transaction (low risk)
 
-### ▶️ Run the demo locally
+![Normal transaction](assets/streamlit_normal.png)
+
+---
+
+### ⚠️ High-risk transaction (flagged by the model)
+
+![High-risk transaction](assets/streamlit_high_risk.png)
+
+The dashboard allows analysts to inspect:
+- SOM cluster assignment
+- Risk score
+- Top SHAP features driving the decision
+- Feature-level impact direction (increase / decrease risk)
+
+---
+
+## ▶️ Run the Demo Locally
 
 ```bash
 # clone the repository
@@ -85,24 +99,19 @@ pip install -r requirements.txt
 
 # launch Streamlit app
 python3 -m streamlit run src/app.py
-The app will open in your browser at:
 
+The app will open in your browser at:
 http://localhost:8501
 
-✅ Normal transaction (low risk)
-
-<img width="1340" height="741" alt="Screenshot 2025-12-25 at 16 59 07" src="https://github.com/user-attachments/assets/9ad19142-c832-4213-aa37-11d712fe0d2e" />
-
-
-⚠️ High-risk transaction (flagged by the model)
-
-<img width="1340" height="749" alt="Screenshot 2025-12-25 at 16 59 39" src="https://github.com/user-attachments/assets/a54903e9-9ac0-46e8-98af-1f79c9f7e8a5" />
-
-The dashboard allows analysts to inspect:
-	•	SOM cluster assignment
-	•	Risk score
-	•	Top SHAP features driving the decision
-	•	Feature-level impact direction (increase / decrease risk)
+📂 Repository Structure
+som-shap-fraud-detection/
+├── data/        # Demo dataset (Vesta sample)
+├── models/      # Pre-trained SOM, XGBoost & SHAP objects (.pkl)
+├── src/         # Source code (Streamlit app & training scripts)
+├── assets/      # Screenshots used in README
+├── README.md
+├── LICENSE
+└── .gitignore
 
 📈 Results Summary
 	•	Strong clustering quality (Silhouette score up to ~0.57)
@@ -113,12 +122,16 @@ The dashboard allows analysts to inspect:
 
 Importantly, explainability did not come at the cost of performance.
 
+⸻
+
 🧩 Why This Project Is Novel
 	•	Uses SHAP in an unsupervised setting
 	•	Explains clusters, not just predictions
 	•	Combines topological SOM maps with feature-level attributions
 	•	Designed with audit & regulatory readiness in mind
 	•	Demonstrates how explainable AI can support human fraud analysts
+
+⸻
 
 🔮 Future Work
 	•	Real-time / streaming SOM variants
